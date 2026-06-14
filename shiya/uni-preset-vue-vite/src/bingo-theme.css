@@ -1,0 +1,334 @@
+/* Bingo Game Color Theme - Inspired by 可翻牌的Bingo九宫格 */
+
+:root {
+  /* Primary Colors */
+  --bingo-yellow: #fcea51;
+  --bingo-light-yellow: #f5f6af;
+  --bingo-light-green: #c8deae;
+  --bingo-green: #85b251;
+  --bingo-dark-green: #4a7a1e;
+  
+  /* Theme Gradients */
+  --bingo-gradient-1: linear-gradient(135deg, #fcea51 0%, #85b251 100%);
+  --bingo-gradient-2: linear-gradient(135deg, #c8deae 0%, #85b251 100%);
+  --bingo-gradient-3: linear-gradient(135deg, #f5f6af 0%, #85b251 100%);
+  --bingo-gradient-4: linear-gradient(135deg, #85b251 0%, #fcea51 100%);
+  
+  /* Effect Colors */
+  --bingo-effect-1: rgba(133, 178, 81, 0.72);
+  --bingo-effect-2: rgba(245, 246, 175, 0.55);
+  --bingo-effect-3: rgba(252, 234, 81, 0.80);
+  
+  /* Shadow Colors */
+  --bingo-shadow-light: rgba(133, 178, 81, 0.13);
+  --bingo-shadow-medium: rgba(74, 122, 30, 0.13);
+  --bingo-shadow-strong: rgba(90, 90, 64, 0.3);
+  
+  /* Background Blur */
+  --bingo-glass-bg: rgba(255, 255, 255, 0.58);
+  --bingo-glass-border: rgba(133, 178, 81, 0.2);
+}
+
+/* Bingo Animations */
+@keyframes ringOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.18);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0) rotate(-12deg);
+    opacity: 0;
+  }
+  65% {
+    transform: scale(1.18) rotate(4deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes bigBangFlash {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.18;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes floatY {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes gradShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes pulseScale {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes sparkleAnim {
+  0%, 100% {
+    opacity: 0.5;
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-5px) scale(1.2);
+  }
+}
+
+@keyframes brushStroke {
+  0% {
+    stroke-dashoffset: 130;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Utility Classes for Bingo */
+.bingo-glow {
+  box-shadow: 0 0 0 3.5px var(--bingo-green), 0 6px 24px var(--bingo-effect-1);
+}
+
+.bingo-card-flip {
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.bingo-card-flip.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.bingo-glass {
+  background: var(--bingo-glass-bg);
+  backdrop-filter: blur(18px);
+  border: 1.5px solid var(--bingo-glass-border);
+  box-shadow: 0 8px 48px rgba(133, 178, 81, 0.22), 0 2px 12px rgba(252, 234, 81, 0.33);
+}
+
+.bingo-gradient-text {
+  background: linear-gradient(120deg, #4a7a1e, #85b251, #a0d040, #fcea51, #4a7a1e);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradShift 4s ease infinite;
+}
+
+.bingo-progress-bar {
+  background: linear-gradient(90deg, #85b251, #a0d040, #fcea51);
+  box-shadow: 0 0 10px rgba(133, 178, 81, 0.88);
+}
+
+.bingo-background-blob {
+  position: absolute;
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+/* Card Themes for Different Indexes */
+.bingo-theme-yellow {
+  background: #fcea51;
+  color: #3a2c00;
+}
+
+.bingo-theme-light-green {
+  background: #c8deae;
+  color: #1a3a08;
+}
+
+.bingo-theme-light-yellow {
+  background: #f5f6af;
+  color: #38380a;
+}
+
+.bingo-theme-green {
+  background: #85b251;
+  color: #ffffff;
+}
+
+/* Particle Effects Base */
+.bingo-particle {
+  position: absolute;
+  pointer-events: none;
+  animation: particleFade 1s ease-out forwards;
+}
+
+@keyframes particleFade {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx), var(--ty)) scale(0);
+  }
+}
+
+/* Brush Stroke SVG Overlay */
+.brush-stroke-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.brush-stroke-overlay svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Ring Ripple Effect */
+.ring-ripple {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  animation: ringOut 0.5s ease-out forwards;
+  z-index: 20;
+}
+
+/* Bingo Line Highlight */
+.bingo-line-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 8rpx 24rpx;
+  border-radius: 999rpx;
+  font-weight: bold;
+  background: #85b251;
+  color: #fff;
+  box-shadow: 0 3px 12px rgba(133, 178, 81, 0.88);
+  animation: popIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  font-family: 'Nunito', 'Fredoka', sans-serif;
+}
+
+/* Completed State */
+.bingo-card-completed {
+  position: relative;
+}
+
+.bingo-card-completed::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(133, 178, 81, 0.22) 0%, transparent 70%);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Selection Glow */
+.bingo-selection-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 50% 50%, rgba(133, 178, 81, 0.22) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Action Button Styles */
+.bingo-action-btn {
+  padding: 20rpx 40rpx;
+  border-radius: 999rpx;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.bingo-action-btn:active {
+  transform: scale(0.95);
+}
+
+.bingo-action-btn:hover {
+  transform: scale(1.05);
+}
+
+.bingo-action-btn.primary {
+  background: var(--bingo-gradient-1);
+  color: #fff;
+  box-shadow: 0 4px 18px rgba(133, 178, 81, 0.66);
+}
+
+.bingo-action-btn.secondary {
+  background: rgba(255, 255, 255, 0.75);
+  color: #4a7a1e;
+  backdrop-filter: blur(8px);
+  border: 1.5px solid #c8deae;
+}
+
+/* All Done Banner */
+.bingo-all-done {
+  padding: 24rpx 48rpx;
+  border-radius: 24rpx;
+  font-weight: bold;
+  background: var(--bingo-gradient-4);
+  color: #fff;
+  box-shadow: 0 4px 24px rgba(133, 178, 81, 0.66);
+  animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  font-family: 'Nunito', 'Fredoka', sans-serif;
+}
+
+/* Header Styles */
+.bingo-header {
+  text-align: center;
+  margin-bottom: 30rpx;
+  animation: floatY 4s ease-in-out infinite;
+}
+
+.bingo-header h1 {
+  font-family: 'Fredoka', 'Nunito', sans-serif;
+  font-weight: bold;
+  letter-spacing: -0.025em;
+  margin-bottom: 8rpx;
+}
+
+.bingo-header p {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #4a7a1e;
+  opacity: 0.75;
+}

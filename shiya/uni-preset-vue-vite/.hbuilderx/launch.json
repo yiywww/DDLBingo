@@ -1,0 +1,11 @@
+{
+    "version" : "1.0",
+    "configurations" : [
+        {
+            "customPlaygroundType" : "device",
+            "localRepoPath" : "D:/拾鸦_crow/uni-preset-vue-vite",
+            "playground" : "custom",
+            "type" : "uni-app:app-android"
+        }
+    ]
+}
